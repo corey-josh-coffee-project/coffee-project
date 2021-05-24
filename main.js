@@ -58,6 +58,6 @@ let coffees = [
 let submitButton = document.querySelector('#submit');
 let roastSelection = document.querySelector('#roast-selection');
 
-coffeeDiv.appendChild(renderCoffees(coffees));
+coffeeDiv.appendChild(renderCoffees(coffees.reverse()));
 
 submitButton.addEventListener('click', updateCoffees);
