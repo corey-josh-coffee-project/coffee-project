@@ -1,14 +1,8 @@
 "use strict"
 
-const coffeeDiv = document.getElementById("coffees")
+let coffeeDiv = document.getElementById("coffees")
 
 function renderCoffee(coffee) {
-    // var div = `
-    //     <div class"${coffee}">
-    //         <p><span>${coffee.name}</span> ${coffee.roast}</p>
-    //     </div>`
-    // return div;
-
     let div = document.createElement("div");
     div.setAttribute("class", "coffee")
     div.innerHTML =
@@ -17,10 +11,11 @@ function renderCoffee(coffee) {
 }
 
 function renderCoffees(coffees) {
+    let outterDiv = document.createElement("div");
     for(var i = coffees.length - 1; i >= 0; i--) {
-        coffeeDiv.appendChild(renderCoffee(coffees[i]));
+        outterDiv.appendChild(renderCoffee(coffees[i]));
     }
-    return coffeeDiv;
+    return outterDiv;
 }
 
 function updateCoffees(e) {
@@ -32,7 +27,9 @@ function updateCoffees(e) {
             filteredCoffees.push(coffee);
         }
     });
-    // tbody.innerHTML = renderCoffees(filteredCoffees);
+    while (coffeeDiv.firstChild) {
+        coffeeDiv.removeChild(coffeeDiv.firstChild);
+    }
     coffeeDiv.appendChild(renderCoffees(filteredCoffees));
 }
 
@@ -59,5 +56,7 @@ let submitButton = document.querySelector('#submit');
 let roastSelection = document.querySelector('#roast-selection');
 
 coffeeDiv.appendChild(renderCoffees(coffees.reverse()));
+// coffeeDiv.innerHTML = `${renderCoffees(coffees.reverse())}`;
+
 
 submitButton.addEventListener('click', updateCoffees);
