@@ -1,14 +1,8 @@
 "use strict"
 
-const coffeeDiv = document.getElementById("coffees")
+let coffeeDiv = document.getElementById("coffees")
 
 function renderCoffee(coffee) {
-    // var div = `
-    //     <div class"${coffee}">
-    //         <p><span>${coffee.name}</span> ${coffee.roast}</p>
-    //     </div>`
-    // return div;
-
     let div = document.createElement("div");
     div.setAttribute("class", "coffee")
     div.innerHTML =
@@ -17,23 +11,48 @@ function renderCoffee(coffee) {
 }
 
 function renderCoffees(coffees) {
+    let outterDiv = document.createElement("div");
     for(var i = coffees.length - 1; i >= 0; i--) {
-        coffeeDiv.appendChild(renderCoffee(coffees[i]));
+        outterDiv.appendChild(renderCoffee(coffees[i]));
     }
-    return coffeeDiv;
+    return outterDiv;
 }
 
 function updateCoffees(e) {
     e.preventDefault(); // don't submit the form, we just want to update the data
     let selectedRoast = roastSelection.value;
     let filteredCoffees = [];
+    if (selectedRoast === "All") {
+        while (coffeeDiv.firstChild) {
+            coffeeDiv.removeChild(coffeeDiv.firstChild);
+        }
+        coffeeDiv.appendChild(renderCoffees(coffees));
+    } else {
+        coffees.forEach(function(coffee) {
+            if (coffee.roast === selectedRoast.toLowerCase()) {
+                filteredCoffees.push(coffee);
+            }
+        });
+        while (coffeeDiv.firstChild) {
+            coffeeDiv.removeChild(coffeeDiv.firstChild);
+        }
+        coffeeDiv.appendChild(renderCoffees(filteredCoffees));
+    }
+}
+
+function filterCoffees(e) {
+    e.preventDefault();
+    let inputCoffee = coffeeInput.value;
+    let coffArray = [];
     coffees.forEach(function(coffee) {
-        if (coffee.roast === selectedRoast) {
-            filteredCoffees.push(coffee);
+        if (coffee.name === inputCoffee) {
+            coffArray.push(coffee);
         }
     });
-    // tbody.innerHTML = renderCoffees(filteredCoffees);
-    coffeeDiv.appendChild(renderCoffees(filteredCoffees));
+    while (coffeeDiv.firstChild) {
+        coffeeDiv.removeChild(coffeeDiv.firstChild);
+    }
+    coffeeDiv.appendChild(renderCoffees(coffArray));
 }
 
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
@@ -57,7 +76,12 @@ let coffees = [
 
 let submitButton = document.querySelector('#submit');
 let roastSelection = document.querySelector('#roast-selection');
+let coffeeInput = document.getElementById("pick-coffee");
+let submitForCoffee = document.querySelector("#coff-submit");
 
 coffeeDiv.appendChild(renderCoffees(coffees.reverse()));
 
+
 submitButton.addEventListener('click', updateCoffees);
+// coffeeInput.addEventListener("input", filterCoffees);
+submitForCoffee.addEventListener("click", filterCoffees);
