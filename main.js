@@ -26,7 +26,7 @@ function updateCoffees(e) {
         while (coffeeDiv.firstChild) {
             coffeeDiv.removeChild(coffeeDiv.firstChild);
         }
-        coffeeDiv.appendChild(renderCoffees(coffees.reverse()));
+        coffeeDiv.appendChild(renderCoffees(coffees));
     } else {
         coffees.forEach(function(coffee) {
             if (coffee.roast === selectedRoast.toLowerCase()) {
@@ -40,7 +40,20 @@ function updateCoffees(e) {
     }
 }
 
-
+function filterCoffees(e) {
+    e.preventDefault();
+    let inputCoffee = coffeeInput.value;
+    let coffArray = [];
+    coffees.forEach(function(coffee) {
+        if (coffee.name === inputCoffee) {
+            coffArray.push(coffee);
+        }
+    });
+    while (coffeeDiv.firstChild) {
+        coffeeDiv.removeChild(coffeeDiv.firstChild);
+    }
+    coffeeDiv.appendChild(renderCoffees(coffArray));
+}
 
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
 let coffees = [
@@ -63,8 +76,12 @@ let coffees = [
 
 let submitButton = document.querySelector('#submit');
 let roastSelection = document.querySelector('#roast-selection');
+let coffeeInput = document.getElementById("pick-coffee");
+let submitForCoffee = document.querySelector("#coff-submit");
 
 coffeeDiv.appendChild(renderCoffees(coffees.reverse()));
 
 
 submitButton.addEventListener('click', updateCoffees);
+// coffeeInput.addEventListener("input", filterCoffees);
+submitForCoffee.addEventListener("click", filterCoffees);
