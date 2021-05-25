@@ -26,16 +26,12 @@ function updateCoffees(e) {
     let matchRoastArr = [];
     let matchInputArr = [];
     coffees.forEach(function (coffee) {
-        if (coffee.roast.toLowerCase() === selectedRoast.toLowerCase()) {
+        if (coffee.roast.toLowerCase() === selectedRoast.toLowerCase() || selectedRoast.toLowerCase() === "all") {
             matchRoastArr.push(coffee);
         }
     });
-    if (matchRoastArr.length === 0) {
-        replaceCoffees(coffees);
-    } else {
-        replaceCoffees(matchRoastArr)
-    }
 
+    replaceCoffees(matchRoastArr)
 
     if (inputCoffee) {
         matchRoastArr.forEach(function (coffee) {
