@@ -22,11 +22,19 @@ function updateCoffees(e) {
     e.preventDefault(); // don't submit the form, we just want to update the data
     let selectedRoast = roastSelection.value;
     let filteredCoffees = [];
-    coffees.forEach(function(coffee) {
-        if (coffee.roast === selectedRoast) {
-            filteredCoffees.push(coffee);
+    if (selectedRoast === "all") {
+        while (coffeeDiv.firstChild) {
+            coffeeDiv.removeChild(coffeeDiv.firstChild);
         }
-    });
+        coffeeDiv.appendChild(renderCoffees(coffees.reverse()));
+    } else {
+        coffees.forEach(function(coffee) {
+            if (coffee.roast === selectedRoast) {
+                filteredCoffees.push(coffee);
+            }
+        });
+    }
+
     while (coffeeDiv.firstChild) {
         coffeeDiv.removeChild(coffeeDiv.firstChild);
     }
