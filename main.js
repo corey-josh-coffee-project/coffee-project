@@ -54,7 +54,23 @@ function filterCoffees(e) {
     }
     coffeeDiv.appendChild(renderCoffees(coffArray));
 }
+function myFilter() {
+    // for (let i = 0; i <= 0; i++);
+  let pTags = document.querySelectorAll("p");
+    let input = coffeeInput.value;
+    let newArray = [];
+  pTags.forEach(function (coffee){
+      if (input != coffee) {
+          newArray.push(coffee);
+      }
+  });
+    while (coffeeDiv.firstChild) {
+        coffeeDiv.removeChild(coffeeDiv.firstChild);
+    }
+    coffeeDiv.appendChild(renderCoffees(newArray));
+}
 
+// console.log(document.getElementsByTagName("p"))
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
 let coffees = [
     {id: 1, name: 'Light City', roast: 'light'},
@@ -83,5 +99,5 @@ coffeeDiv.appendChild(renderCoffees(coffees.reverse()));
 
 
 submitButton.addEventListener('click', updateCoffees);
-// coffeeInput.addEventListener("input", filterCoffees);
+coffeeInput.addEventListener("input", myFilter);
 submitForCoffee.addEventListener("click", filterCoffees);
