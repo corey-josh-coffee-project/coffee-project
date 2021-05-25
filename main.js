@@ -6,13 +6,13 @@ function renderCoffee(coffee) {
     let div = document.createElement("div");
     div.setAttribute("class", "coffee")
     div.innerHTML =
-            `<p><span>${coffee.name}</span> ${coffee.roast}</p>`
+        `<p><span>${coffee.name}</span> ${coffee.roast}</p>`
     return div;
 }
 
 function renderCoffees(coffees) {
     let outterDiv = document.createElement("div");
-    for(var i = coffees.length - 1; i >= 0; i--) {
+    for (var i = coffees.length - 1; i >= 0; i--) {
         outterDiv.appendChild(renderCoffee(coffees[i]));
     }
     return outterDiv;
@@ -21,40 +21,68 @@ function renderCoffees(coffees) {
 function updateCoffees(e) {
     e.preventDefault(); // don't submit the form, we just want to update the data
     let selectedRoast = roastSelection.value;
-    let filteredCoffees = [];
-    if (selectedRoast === "All") {
-        while (coffeeDiv.firstChild) {
-            coffeeDiv.removeChild(coffeeDiv.firstChild);
+    let inputCoffee = coffeeInput.value;
+    console.log(selectedRoast)
+    let matchRoastArr = [];
+    let matchInputArr = [];
+    coffees.forEach(function (coffee) {
+        if (coffee.roast.toLowerCase() === selectedRoast.toLowerCase()) {
+            matchRoastArr.push(coffee);
         }
-        coffeeDiv.appendChild(renderCoffees(coffees));
-    } else {
-        coffees.forEach(function(coffee) {
-            if (coffee.roast === selectedRoast.toLowerCase()) {
-                filteredCoffees.push(coffee);
+
+    });
+    replaceCoffees(matchRoastArr)
+    if (inputCoffee) {
+        matchRoastArr.forEach(function (coffee) {
+            if (coffee.name.toLowerCase().includes(inputCoffee.toLowerCase())) {
+                matchInputArr.push(coffee);
             }
-        });
-        while (coffeeDiv.firstChild) {
-            coffeeDiv.removeChild(coffeeDiv.firstChild);
-        }
-        coffeeDiv.appendChild(renderCoffees(filteredCoffees));
+        })
+        replaceCoffees(matchInputArr);
     }
 }
 
-function filterCoffees(e) {
-    e.preventDefault();
-    let inputCoffee = coffeeInput.value;
-    let coffArray = [];
-    coffees.forEach(function(coffee) {
-        if (coffee.name === inputCoffee) {
-            coffArray.push(coffee);
-        }
-    });
+function replaceCoffees(coffeeArr) {
     while (coffeeDiv.firstChild) {
         coffeeDiv.removeChild(coffeeDiv.firstChild);
     }
-    coffeeDiv.appendChild(renderCoffees(coffArray));
+    coffeeDiv.appendChild(renderCoffees(coffeeArr));
 }
 
+// function filterCoffees(e) {
+//     e.preventDefault();
+//     let inputCoffee = coffeeInput.value;
+//     let coffArray = [];
+//     coffees.forEach(function (coffee) {
+//         if (coffee.name === inputCoffee) {
+//             coffArray.push(coffee);
+//         }
+//     });
+//     while (coffeeDiv.firstChild) {
+//         coffeeDiv.removeChild(coffeeDiv.firstChild);
+//     }
+//
+//     coffeeDiv.appendChild(renderCoffees(coffArray));
+// }
+//
+// function myFilter() {
+//     // for (let i = 0; i <= 0; i++);
+//     let pTags = document.querySelectorAll("p");
+//     let input = coffeeInput.value;
+//     let newArray = [];
+//     pTags.forEach(function (coffee) {
+//         if (input !== coffee.textContent) {
+//             newArray.push(coffee);
+//         }
+//     });
+//     while (coffeeDiv.firstChild) {
+//         coffeeDiv.removeChild(coffeeDiv.firstChild);
+//     }
+//     console.log(newArray)
+//     coffeeDiv.appendChild(renderCoffees(newArray));
+// }
+
+// console.log(document.getElementsByTagName("p"))
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
 let coffees = [
     {id: 1, name: 'Light City', roast: 'light'},
@@ -74,14 +102,12 @@ let coffees = [
 ];
 
 
-let submitButton = document.querySelector('#submit');
 let roastSelection = document.querySelector('#roast-selection');
 let coffeeInput = document.getElementById("pick-coffee");
 let submitForCoffee = document.querySelector("#coff-submit");
 
 coffeeDiv.appendChild(renderCoffees(coffees.reverse()));
 
-
-submitButton.addEventListener('click', updateCoffees);
-// coffeeInput.addEventListener("input", filterCoffees);
-submitForCoffee.addEventListener("click", filterCoffees);
+roastSelection.addEventListener("change", updateCoffees);
+coffeeInput.addEventListener("input", updateCoffees);
+submitForCoffee.addEventListener("click", updateCoffees);
