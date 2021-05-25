@@ -40,6 +40,8 @@ function updateCoffees(e) {
     }
 }
 
+
+
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
 let coffees = [
     {id: 1, name: 'Light City', roast: 'light'},
