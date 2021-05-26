@@ -26,12 +26,13 @@ function updateCoffees(e) {
     let matchRoastArr = [];
     let matchInputArr = [];
     coffees.forEach(function (coffee) {
-        if (coffee.roast.toLowerCase() === selectedRoast.toLowerCase()) {
+        if (coffee.roast.toLowerCase() === selectedRoast.toLowerCase() || selectedRoast.toLowerCase() === "all") {
             matchRoastArr.push(coffee);
         }
-
     });
+
     replaceCoffees(matchRoastArr)
+
     if (inputCoffee) {
         matchRoastArr.forEach(function (coffee) {
             if (coffee.name.toLowerCase().includes(inputCoffee.toLowerCase())) {
@@ -49,40 +50,7 @@ function replaceCoffees(coffeeArr) {
     coffeeDiv.appendChild(renderCoffees(coffeeArr));
 }
 
-// function filterCoffees(e) {
-//     e.preventDefault();
-//     let inputCoffee = coffeeInput.value;
-//     let coffArray = [];
-//     coffees.forEach(function (coffee) {
-//         if (coffee.name === inputCoffee) {
-//             coffArray.push(coffee);
-//         }
-//     });
-//     while (coffeeDiv.firstChild) {
-//         coffeeDiv.removeChild(coffeeDiv.firstChild);
-//     }
-//
-//     coffeeDiv.appendChild(renderCoffees(coffArray));
-// }
-//
-// function myFilter() {
-//     // for (let i = 0; i <= 0; i++);
-//     let pTags = document.querySelectorAll("p");
-//     let input = coffeeInput.value;
-//     let newArray = [];
-//     pTags.forEach(function (coffee) {
-//         if (input !== coffee.textContent) {
-//             newArray.push(coffee);
-//         }
-//     });
-//     while (coffeeDiv.firstChild) {
-//         coffeeDiv.removeChild(coffeeDiv.firstChild);
-//     }
-//     console.log(newArray)
-//     coffeeDiv.appendChild(renderCoffees(newArray));
-// }
 
-// console.log(document.getElementsByTagName("p"))
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
 let coffees = [
     {id: 1, name: 'Light City', roast: 'light'},
