@@ -17,7 +17,7 @@ hr {
 }
 p {
     font-family: 'ZCOOL KuaiLe', cursive;
-    color: #F3D5B5;
+    color: #353535;
     -webkit-text-stroke: 1px black;
 }
 span {
@@ -46,7 +46,7 @@ span {
     width: 0;
     height: 0;
     border: 50px solid transparent;
-    border-bottom: 20px solid white;
+    border-bottom: 20px solid #bc6c25;
     position: relative;
     top: -50px;
     /*z-index: -1;*/
@@ -59,7 +59,7 @@ span {
     width: 0;
     height: 0;
     border: 50px solid transparent;
-    border-top: 70px solid white;
+    border-top: 70px solid #bc6c25;
 }
 
 #roast-selection {
