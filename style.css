@@ -1,9 +1,28 @@
-table {
-    border-collapse: collapse;
-    margin: 15px 0;
+body {
+    background-image: url("https://images.pexels.com/photos/851555/pexels-photo-851555.jpeg?cs=srgb&dl=pexels-jason-villanueva-851555.jpg&fm=jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-td, th {
-    border: 1px solid black;
-    padding: 5px 10px;
+h1 {
+    font-family: 'Odibee Sans', cursive;
+    color: #FFA033;
+}
+hr {
+    border: 10px solid #582F0E;
+    color: ;
+    z-index: 5;
+}
+
+.coffee-pic {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+#roast-selection {
+    height: 100%;
 }
