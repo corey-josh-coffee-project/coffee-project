@@ -1,9 +1,67 @@
-table {
-    border-collapse: collapse;
-    margin: 15px 0;
+body {
+    background-image: url("https://images.pexels.com/photos/851555/pexels-photo-851555.jpeg?cs=srgb&dl=pexels-jason-villanueva-851555.jpg&fm=jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-td, th {
-    border: 1px solid black;
-    padding: 5px 10px;
+h1 {
+    font-family: 'Odibee Sans', cursive;
+    color: #FFA033;
+    -webkit-text-stroke: 1px black;
+    z-index: 1;
 }
+hr {
+    border: 10px solid #582F0E;
+    z-index: 5;
+}
+p {
+    font-family: 'ZCOOL KuaiLe', cursive;
+    color: #353535;
+    -webkit-text-stroke: 1px black;
+}
+span {
+    /*font-weight: bolder;*/
+    text-underline: black;
+    font-size: 18px;
+}
+
+.coffee-pic {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    object-fit: cover;
+    z-index: -10;
+}
+#coffees {
+    height: 600px;
+}
+#diamond {
+    position: absolute;
+    opacity: 30%;
+}
+
+#diamond-shield {
+    width: 0;
+    height: 0;
+    border: 50px solid transparent;
+    border-bottom: 20px solid #bc6c25;
+    position: relative;
+    top: -50px;
+    /*z-index: -1;*/
+}
+#diamond-shield:after {
+    content: '';
+    position: absolute;
+    left: -50px;
+    top: 20px;
+    width: 0;
+    height: 0;
+    border: 50px solid transparent;
+    border-top: 70px solid #bc6c25;
+}
+
+#roast-selection {
+     height: 100%;
+ }
