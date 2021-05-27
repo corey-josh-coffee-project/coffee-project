@@ -6,7 +6,7 @@ function renderCoffee(coffee) {
     let div = document.createElement("div");
     div.setAttribute("class", "coffee")
     div.innerHTML =
-        `<p><span>${coffee.name}</span> ${coffee.roast}</p>`
+        `<p><span>${coffee.name}</span> -${coffee.roast}</p>`
     return div;
 }
 
